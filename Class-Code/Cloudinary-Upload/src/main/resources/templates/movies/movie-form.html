@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Movie</title>
+    <style th:replace="~{fragments/fragment :: base-styling}"></style>
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet"/>
+
+    <style>
+        #form-page-container {
+           font-family: Arial, sans-serif;
+           max-width: 600px;
+           margin: 0 auto;
+           padding: 20px;
+       }
+       .form-container {
+           background-color: #f5f5f5;
+           padding: 20px;
+           border-radius: 5px;
+       }
+       form div {
+           margin-bottom: 15px;
+       }
+       label {
+           display: inline-block;
+           width: 150px;
+       }
+       input[type="text"], input[type="number"] {
+           width: 200px;
+           padding: 5px;
+       }
+                  select[multiple] {
+                             width: 200px;
+                  }
+       button {
+           background-color: #4CAF50;
+           color: white;
+           padding: 10px 20px;
+           border: none;
+           border-radius: 4px;
+           cursor: pointer;
+       }
+       a {
+           display: inline-block;
+           margin-top: 20px;
+           color: #666;
+           text-decoration: none;
+       }
+        span.error {
+           color: red;
+    </style>
+</head>
+<body>
+
+
+<div th:replace="~{fragments/fragment :: navbar}"></div>
+
+
+<div id="form-page-container">
+    <div class="form-container">
+        <form th:action="${movie.id == null} ? @{/movies/create} : @{/movies/update/{id}(id=${movie.id})}" method="post" th:object="${movie}">
+            <h1 th:text="${movie.id == null} ? 'Create A New Movie' : 'Update Movie Details' "></h1>
+
+            <div>
+                <label for="title">Title: </label>
+                <input th:field="*{title}" required type="text" id="title" minlength="1" maxlength="100">
+                <span th:if="${#fields.hasErrors('title')}" th:errors="*{title}" class="error"></span>
+            </div>
+
+            <div>
+                <label for="duration">Duration: </label>
+                <input th:field="*{duration}" required type="number" id="duration" max="1000" min="1">
+                <span th:if="${#fields.hasErrors('duration')}" th:errors="*{duration}" class="error"></span>
+            </div>
+
+            <div>
+                <label for="release-year">Release Year: </label>
+                <input th:field="*{releaseYear}" required type="number" id="release-year" min="1888" max="2030">
+                <span th:if="${#fields.hasErrors('releaseYear')}" th:errors="*{releaseYear}" class="error"></span>
+            </div>
+
+            <div>
+                <label for="genres">Genres: </label>
+                <select name="genreIds" id="genres" multiple>
+                    <option th:each="genre : ${genres}"
+                            th:text="${genre.name}"
+                            th:value="${genre.genreId}">
+                    </option>
+                </select>
+            </div>
+
+            <div>
+                <label for="director">Director: </label>
+                <select th:field="*{director}" id="director" required>
+                    <option value="">Select a Director</option>
+                    <option th:each="director : ${directors}"
+                            th:text="${director.firstName} + ' ' + ${director.lastName}"
+                            th:value="${director.directorId}"
+                    ></option>
+                </select>
+                <span th:if="${#fields.hasErrors('director')}" th:errors="*{director}" class="error"></span>
+            </div>
+
+
+            <div>
+                <label for="language">Language: </label>
+                <input th:field="*{language}" required type="text" id="language">
+                <span th:if="${#fields.hasErrors('language')}" th:errors="*{language}" class="error"></span>
+            </div>
+
+            <div>
+                <label for="won-oscars">Won Oscars: </label>
+                <input  th:field="*{wonOscars}" type="checkbox" id="won-oscars" >
+
+            </div>
+
+
+
+
+
+
+
+
+            <button th:text="${movie.id} == null ? 'Create Movie' : 'Update Movie'" type="submit"></button>
+
+        </form>
+    </div>
+</div>
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#genres').select2();
+    });
+</script>
+
+
+<!--    <link href="https://cdn.jsdelivr.net/npm/tom-select@2.2.2/dist/css/tom-select.css" rel="stylesheet">-->
+<!--    <script src="https://cdn.jsdelivr.net/npm/tom-select@2.2.2/dist/js/tom-select.complete.min.js"></script>-->
+
+<!--    <script>-->
+<!--        new TomSelect('#genres', {-->
+<!--            maxItems: 3,-->
+<!--            plugins: ['remove_button'],-->
+<!--            placeholder: 'Select genres'-->
+<!--        });-->
+<!--    </script>-->
+
+</body>
+</html>

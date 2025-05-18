@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fragment</title>
+
+    <style th:fragment="base-styling">
+        body{
+        margin: 0;
+        padding: 0;
+        }
+        .navbar {
+            background-color: #333;
+            padding: 1rem;
+            margin-bottom: 2rem;
+        }
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            margin-right: 1rem;
+        }
+        .footer {
+            background-color: #333;
+            color: white;
+            padding: 1rem;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            text-align: center;
+        }
+        .footer a {
+            color: white;
+            text-decoration: none;
+            margin: 0 0.5rem;
+        }
+    </style>
+</head>
+<body>
+
+<div th:fragment="navbar">
+    <nav class="navbar">
+        <a th:href="@{/}">Home</a>
+        <a th:href="@{/movies}">All Movies</a>
+        <a th:href="@{/movies/new}">Create New Movie</a>
+        <a th:href="@{/directors/new}">Create New Director</a>
+
+
+    </nav>
+
+    <script th:fragment="js-nav">
+        let aElements = document.querySelectorAll("a")
+
+        aElements.forEach((aElement)=>{
+
+        })
+    </script>
+</div>
+
+
+<div th:fragment="footer">
+    <footer class="footer">
+        <div>
+            <div>
+                <a>Facebook</a>
+                <a>Instagram</a>
+                <a>Twitter</a>
+
+            </div>
+        </div>
+    </footer>
+</div>
+</body>
+</html>

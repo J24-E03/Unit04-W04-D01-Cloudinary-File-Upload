@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Movie List</title>
+    <link rel="stylesheet" th:href="@{/css/movies-list.css}">
+    <style th:replace="~{fragments/fragment :: base-styling}"></style>
+
+
+</head>
+<body>
+
+<div th:replace="~{fragments/fragment :: navbar}"></div>
+
+    <h1>Movie List</h1>
+
+    <div th:each="movie : ${movies}" class="movie-card">
+        <p th:text="'Id: ' + ${movie.id}"></p>
+        <h2 th:text="'Title: ' + ${movie.title}"></h2>
+        <p th:text="'Duration: ' + ${movie.duration} + ' Minutes'"></p>
+        <p th:text="'Release Year: ' + ${movie.releaseYear}"></p>
+        <p th:text="'Diector: ' + ${movie.director.firstName} + ' ' +  ${movie.director.lastName}"></p>
+        <p th:text="'Language: ' + ${movie.language}"></p>
+
+        <a th:href="@{/movies/{id}(id=${movie.id})}">See Movie Details</a>
+        <a th:href="@{/movies/update/{id}(id=${movie.id})}">Update Movie Details</a>
+        <form method="post" th:action="@{/movies/delete/{id}(id=${movie.id})}">
+            <button>Delete Movie</button>
+        </form>
+
+    </div>
+<form method="post" th:action="@{/movies/omar}">
+    <label>
+        <input type="text" name="name"/>
+    </label>
+
+    <label>
+        Occupation
+        <input type="text" name="occupation"/>
+    </label>
+
+    <button>Submit</button>
+</form>
+</body>
+</html>

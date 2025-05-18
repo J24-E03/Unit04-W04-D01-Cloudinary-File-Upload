@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Movie Details</title>
+
+    <style th:replace="~{fragments/fragment :: base-styling}"></style>
+
+    <style>
+        .movie-details{
+            margin:20px;
+            padding:20px;
+            border:1px solid grey;
+            border-radius:5px
+        }
+
+        .movie-property{
+            margin:10px 0;
+        }
+        
+    </style>
+
+</head>
+<body>
+
+
+    <div th:replace="~{fragments/fragment :: navbar}"></div>
+    <h1>Movie Details</h1>
+
+    <div class="movie-details">
+        <h2 th:text="${movie.title}"></h2>
+
+        <div class="movie-property">
+            <p th:text="'Release Year: ' + ${movie.releaseYear}"></p>
+        </div>
+
+        <div class="movie-property">
+            <p th:text="'Language: ' + ${movie.language}"></p>
+        </div>
+
+        <div class="movie-property">
+            <p th:text="'Director: ' + ${movie.director.firstName}"></p>
+        </div>
+
+        <div class="movie-property">
+            <h4>Genres:</h4>
+            <ul>
+                <li th:each="genre : ${movie.genres}" th:text="${genre.name}"></li>
+            </ul>
+        </div>
+
+
+    </div>
+
+
+
+</body>
+</html>
