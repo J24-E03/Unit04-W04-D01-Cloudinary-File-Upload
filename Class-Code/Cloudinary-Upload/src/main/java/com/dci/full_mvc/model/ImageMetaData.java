@@ -21,7 +21,7 @@ public class ImageMetaData {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long imageId;
 
-    private String path;
+    private String imageUrl;
 
     private String publicId;
 
