@@ -3,6 +3,7 @@ package com.dci.full_mvc.service;
 import com.dci.full_mvc.exceptions.ResourceNotFound;
 import com.dci.full_mvc.model.Director;
 import com.dci.full_mvc.model.Genre;
+import com.dci.full_mvc.model.ImageMetaData;
 import com.dci.full_mvc.model.Movie;
 import com.dci.full_mvc.repository.DirectorRepository;
 import com.dci.full_mvc.repository.GenreRepository;
@@ -36,11 +37,17 @@ public class MovieService {
         List<Genre> genres = genreRepository.findAllById(genreIds);
         movie.setGenres(genres);
 
+        Map<String,String> uploadedData =  imageUploadService.uploadImage(posterImage);
+
+        ImageMetaData imageMetaData = new ImageMetaData();
+        imageMetaData.setImageUrl(uploadedData.get("url"));
+        imageMetaData.setPublicId(uploadedData.get("publicId"));
+
+        movie.setPoster(imageMetaData);
+
 
 
         Movie createdMovie = movieRepository.save(movie);
-
-        Map<String, String> uploadResult = imageUploadService.uploadImage(posterImage);
 
 
         return createdMovie;

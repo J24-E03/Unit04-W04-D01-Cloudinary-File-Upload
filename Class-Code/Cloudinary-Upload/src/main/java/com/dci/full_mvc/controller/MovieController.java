@@ -6,6 +6,7 @@ import com.dci.full_mvc.model.Movie;
 import com.dci.full_mvc.repository.DirectorRepository;
 import com.dci.full_mvc.repository.GenreRepository;
 import com.dci.full_mvc.repository.MovieRepository;
+import com.dci.full_mvc.service.ImageUploadService;
 import com.dci.full_mvc.service.MovieService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +30,7 @@ public class MovieController {
     private final DirectorRepository directorRepository;
     private final GenreRepository genreRepository;
     private final MovieService movieService;
+    private final ImageUploadService imageUploadService;
 
 
     @GetMapping
@@ -62,7 +65,7 @@ public class MovieController {
     * */
 
     @PostMapping("/create")
-    public String createNewMovie(@Valid @ModelAttribute Movie movie, BindingResult bindingResult, @RequestParam List<Long> genreIds,Model model){
+    public String createNewMovie(@Valid @ModelAttribute Movie movie, BindingResult bindingResult, @RequestParam List<Long> genreIds, Model model, @RequestParam MultipartFile posterImage){
 
 
         if (bindingResult.hasErrors()) {
@@ -71,7 +74,7 @@ public class MovieController {
             return "movies/movie-form";
         }
 
-        Movie createdMovie = movieService.createMovie(movie,genreIds);
+        Movie createdMovie = movieService.createMovie(movie,genreIds,posterImage);
         return "redirect:/movies/" + createdMovie.getId();
     }
 

@@ -27,11 +27,13 @@ public class ImageUploadService {
         }
 
 
+//        allowed types to post to my image upload server
         Map<String, Object> options = new HashMap<>();
         options.put("resource_type", "image");
-        options.put("allowed_formats", new String[]{"jpg", "png", "jpeg"});
+        options.put("allowed_formats", new String[]{"jpg", "png", "jpeg","pdf"});
 
 
+//        uploading of the image to cloudinary
         Map uploadResult;
         try {
             uploadResult = cloudinary.uploader().upload(file.getBytes(),options);

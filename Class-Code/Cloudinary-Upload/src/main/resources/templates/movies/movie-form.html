@@ -76,6 +76,12 @@
             </div>
 
             <div>
+                <label for="posterImage">Duration: </label>
+                <input name="posterImage" required type="file" id="posterImage">
+                <span th:if="${#fields.hasErrors('duration')}" th:errors="*{duration}" class="error"></span>
+            </div>
+
+            <div>
                 <label for="release-year">Release Year: </label>
                 <input th:field="*{releaseYear}" required type="number" id="release-year" min="1888" max="2030">
                 <span th:if="${#fields.hasErrors('releaseYear')}" th:errors="*{releaseYear}" class="error"></span>
