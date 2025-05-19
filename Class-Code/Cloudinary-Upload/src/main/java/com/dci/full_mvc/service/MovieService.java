@@ -9,8 +9,10 @@ import com.dci.full_mvc.repository.GenreRepository;
 import com.dci.full_mvc.repository.MovieRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
@@ -18,9 +20,10 @@ public class MovieService {
     private final DirectorRepository directorRepository;
     private final GenreRepository genreRepository;
     private final MovieRepository movieRepository;
+    private final ImageUploadService imageUploadService;
 
 
-    public Movie createMovie( Movie movie, List<Long> genreIds){
+    public Movie createMovie(Movie movie, List<Long> genreIds, MultipartFile posterImage){
 
 //        validation for the director
         Director director = directorRepository.findById(movie.getDirector().getDirectorId())
@@ -37,8 +40,13 @@ public class MovieService {
 
         Movie createdMovie = movieRepository.save(movie);
 
+        Map<String, String> uploadResult = imageUploadService.uploadImage(posterImage);
+
+
         return createdMovie;
     }
+
+
 
     public List<Movie> findAll(){
         return movieRepository.findAll();

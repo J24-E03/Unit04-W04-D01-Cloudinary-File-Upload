@@ -62,4 +62,9 @@ public class Movie {
     )
     private List<Genre> genres = new ArrayList<>();
 
+
+
+    @OneToOne(mappedBy = "movie", cascade = CascadeType.ALL)
+    private ImageMetaData poster;
+
 }

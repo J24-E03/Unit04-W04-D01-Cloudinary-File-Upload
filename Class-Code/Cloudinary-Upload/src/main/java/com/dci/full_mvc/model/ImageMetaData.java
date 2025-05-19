@@ -1,10 +1,7 @@
 package com.dci.full_mvc.model;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -24,6 +21,11 @@ public class ImageMetaData {
     private String imageUrl;
 
     private String publicId;
+
+
+    @OneToOne
+    @JoinColumn(name = "movie_id")
+    private Movie movie;
 
 
 }

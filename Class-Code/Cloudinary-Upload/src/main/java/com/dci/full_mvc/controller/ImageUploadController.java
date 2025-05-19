@@ -37,12 +37,17 @@ public class ImageUploadController {
         String imageUrl = uploadedData.get("url");
         String publicId = uploadedData.get("publicId");
 
-        ImageMetaData imageObj = new ImageMetaData(null,imageUrl,publicId);
+        ImageMetaData imageObj = new ImageMetaData();
+        imageObj.setImageUrl(imageUrl);
+        imageObj.setPublicId(publicId);
 
         System.out.println(imageObj);
 
         imageMetaDataRepository.save(imageObj);
 
-        return "redirect:/upload";
+        model.addAttribute("imageUrl", imageUrl);
+
+
+        return "upload/upload-result";
     }
 }
