@@ -101,6 +101,7 @@ public class MovieController {
 //
     @PostMapping("/delete/{id}")
     public String deleteMovie(@PathVariable Long id){
+        imageUploadService.deleteImage(movieService.findById(id).getPoster().getPublicId());
         movieRepository.deleteById(id);
 
         return "redirect:/movies";

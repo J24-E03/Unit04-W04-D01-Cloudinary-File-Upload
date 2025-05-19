@@ -47,11 +47,21 @@ public class ImageUploadService {
         String url = (String) uploadResult.get("secure_url");
         String publicId = (String) uploadResult.get("public_id");
 
+        System.out.println(uploadResult.values());
+
         return Map.of(
                 "url", url,
                 "publicId", publicId
         );
+    }
 
 
+//    deletes the image from cloudinary
+    public void deleteImage(String publicId){
+        try {
+            cloudinary.uploader().destroy(publicId,ObjectUtils.emptyMap());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

@@ -2,11 +2,13 @@ package com.dci.full_mvc.config;
 
 
 import com.cloudinary.Cloudinary;
+import com.cloudinary.utils.ObjectUtils;
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -35,12 +37,6 @@ public class CloudinaryConfig {
         return new Cloudinary(config);
     }
 
-    @PostConstruct
-    public void init(){
-        System.out.println(cloudName);
-        System.out.println(apiKey);
-        System.out.println(apiSecret);
 
-    }
 
 }

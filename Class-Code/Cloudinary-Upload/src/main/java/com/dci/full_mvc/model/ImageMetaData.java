@@ -14,12 +14,9 @@ import lombok.Setter;
 @Setter
 public class ImageMetaData {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long imageId;
-
     private String imageUrl;
 
+    @Id
     private String publicId;
 
 
