@@ -31,6 +31,7 @@ public class ImageUploadController {
     @PostMapping("/upload")
     public String handleUpload(@RequestParam("image") MultipartFile image, Model model){
 
+        System.out.println("In controller method");
         Map<String,String> uploadedData =  imageUploadService.uploadImage(image);
 
         String imageUrl = uploadedData.get("url");
@@ -39,6 +40,8 @@ public class ImageUploadController {
         ImageMetaData imageObj = new ImageMetaData(null,imageUrl,publicId);
 
         System.out.println(imageObj);
+
+        imageMetaDataRepository.save(imageObj);
 
         return "redirect:/upload";
     }

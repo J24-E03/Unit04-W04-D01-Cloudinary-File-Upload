@@ -8,10 +8,12 @@
 <body>
 
 
-    <form>
+    <form method="post" th:action="@{/upload}" enctype="multipart/form-data">
 
         <label for="image">image</label>
         <input type="file" id="image" name="image">
+
+        <button>Submit Image</button>
     </form>
 
 </body>
