@@ -23,8 +23,7 @@ public class ImageMetaData {
     private String publicId;
 
 
-    @OneToOne
-    @JoinColumn(name = "movie_id")
+    @OneToOne(mappedBy = "poster")
     private Movie movie;
 
 

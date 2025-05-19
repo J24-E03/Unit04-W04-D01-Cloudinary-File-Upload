@@ -24,7 +24,7 @@ import java.util.List;
 @NoArgsConstructor
 @Getter
 @Setter
-//@ToString
+@ToString
 public class Movie {
 
     @Id
@@ -64,7 +64,8 @@ public class Movie {
 
 
 
-    @OneToOne(mappedBy = "movie", cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "image_id")
     private ImageMetaData poster;
 
 }

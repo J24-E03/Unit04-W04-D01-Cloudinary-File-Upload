@@ -42,6 +42,7 @@ public class MovieController {
 
     @GetMapping("/{id}")
     public String getMovieById(@PathVariable Long id,Model model){
+        System.out.println(movieService.findById(id));
         model.addAttribute("movie",movieService.findById(id));
         return "movies/movie-details";
     }
@@ -65,7 +66,11 @@ public class MovieController {
     * */
 
     @PostMapping("/create")
-    public String createNewMovie(@Valid @ModelAttribute Movie movie, BindingResult bindingResult, @RequestParam List<Long> genreIds, Model model, @RequestParam MultipartFile posterImage){
+    public String createNewMovie(@Valid @ModelAttribute Movie movie,
+                                 BindingResult bindingResult,
+                                 @RequestParam List<Long> genreIds,
+                                 Model model,
+                                 @RequestParam MultipartFile posterImage){
 
 
         if (bindingResult.hasErrors()) {

@@ -60,7 +60,7 @@
 
 <div id="form-page-container">
     <div class="form-container">
-        <form th:action="${movie.id == null} ? @{/movies/create} : @{/movies/update/{id}(id=${movie.id})}" method="post" th:object="${movie}">
+        <form th:action="${movie.id == null} ? @{/movies/create} : @{/movies/update/{id}(id=${movie.id})}" method="post" th:object="${movie}" enctype="multipart/form-data">
             <h1 th:text="${movie.id == null} ? 'Create A New Movie' : 'Update Movie Details' "></h1>
 
             <div>
@@ -76,9 +76,8 @@
             </div>
 
             <div>
-                <label for="posterImage">Duration: </label>
+                <label for="posterImage">Poster: </label>
                 <input name="posterImage" required type="file" id="posterImage">
-                <span th:if="${#fields.hasErrors('duration')}" th:errors="*{duration}" class="error"></span>
             </div>
 
             <div>
